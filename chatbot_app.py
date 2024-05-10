@@ -24,7 +24,7 @@ for msg in st.session_state.messages:
 llm = Ollama(model="llama3", base_url="http://3ece-140-109-17-42.ngrok-free.app")
 
 if prompt := st.chat_input():
-
+    
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
     response = llm.invoke(st.session_state.messages)
