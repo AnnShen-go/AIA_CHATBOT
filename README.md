@@ -79,3 +79,27 @@ chunk大小:5000, chunk_overlap=50 ,**每個chunk前面都有「簡章名稱:」
 **簡章切分簡述**:  
 chunk大小:250, chunk_overlap=50
 </details>
+
+
+## 引入 collection 跟 embedding
+```python
+from vector_db import db_and_embedding
+
+query = "技術領袖培訓全域班"
+aia_collection = db_and_embedding.CollectionSelector()
+db = aia_collection.db #預設是XT131028_v1
+
+# 測試
+documents = db.similarity_search(query)
+for i in documents:
+    print(i,"\n\n")
+
+# 切換 DB
+db = aia_collection.switch_collection("xt131028_v1.1")# 填入collection的名稱
+
+# 顯示可以用的 collections
+aia_collection.show_collection_list()
+
+# 使用目前collection所用的 embedding
+embedding = aia_collection.embedding
+```
