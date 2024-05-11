@@ -24,7 +24,8 @@ class Stella_Base_zh_v3_1792d:
         return self.model.encode([query]).tolist()[0]
 
 # 各項 API KEY
-os.environ['NOMIC_API_KEY'] = 'nk-MT_fzB1g18s_js7cf54ecyAeN4eLvd1S4pa8FFwaJqI'
+if not os.environ.get("NOMIC_API_KEY"):
+    os.environ['NOMIC_API_KEY'] = 'nk-MT_fzB1g18s_js7cf54ecyAeN4eLvd1S4pa8FFwaJqI'
 
 
 
