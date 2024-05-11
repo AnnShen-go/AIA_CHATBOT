@@ -5,6 +5,9 @@ from langchain_community.llms import Ollama
 
 import streamlit as st
 
+
+#ngrok http 11434 --host-header="localhost:11434" --scheme http
+
 with st.sidebar:
     st.text_input("choose version")
 
@@ -21,12 +24,12 @@ if "messages" not in st.session_state:
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
-llm = Ollama(model="llama3", base_url="http://3ece-140-109-17-42.ngrok-free.app")
+llm = Ollama(model="llama3", base_url="http://0173-140-109-17-45.ngrok-free.app")
 
 if prompt := st.chat_input():
-    
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
+    print(st.session_state.messages)
     response = llm.invoke(st.session_state.messages)
     #msg = response.choices[0].message.content
     msg = response
