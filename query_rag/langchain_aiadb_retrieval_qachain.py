@@ -12,7 +12,8 @@ Original file is located at
 # 最後建立RetrievalQA : qa_chain，其中qa_chain的{question}參數，為提供給前端進行query時的接口
 
 # 1、建立Emmbedings model for query and retrieavl
-
+import os
+import sys
 from langchain_nomic.embeddings import NomicEmbeddings
 os.environ['NOMIC_API_KEY'] = 'nk-BCjzlgQXfYdZNA6kUZ-6Jeq1NIG2JhlQJaTe9BedpDc'
 # 確保跟PrimeHub vectorDB使用的模型一致：nomic-embed-text-v1.5
