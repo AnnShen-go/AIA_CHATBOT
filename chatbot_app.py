@@ -13,13 +13,13 @@ def get_chroma_collections(server_url):
     # 連線設定
     httpClient = chromadb.HttpClient(
         host=server_url, port=8000,
-        settings=Settings(chroma_client_auth_provider="chromadb.auth.basic.BasicAuthClientProvider",chroma_client_auth_credentials="admin:admin")
+        settings=Settings(chroma_client_auth_provider="chromadb.auth.basic_authn.BasicAuthClientProvider",chroma_client_auth_credentials="admin:admin")
     )
     # Get all collections from the Chroma Server
     collections = httpClient.list_collections()
 
-    for c in collections:
-        print(c)
+    #for c in collections:
+    #    print(c)
 
 get_chroma_collections("64.176.47.89")
 #ngrok http 11434 --host-header="localhost:11434" --scheme http
@@ -44,15 +44,38 @@ for msg in st.session_state.messages:
 
 llm = Ollama(model=llm_model, base_url=ollama_api_url)
 
+def run_rag_process(prompt):
+
+    from query_rag.qa_chain_module import QARetrievalPipeline
+
+    # 初始化流水線，傳入必要的参数
+    pipeline = QARetrievalPipeline(
+        collection_name="xt131028_v1",
+        nomic_api_key="nk-BCjzlgQXfYdZNA6kUZ-6Jeq1NIG2JhlQJaTe9BedpDc", #換成自己的nomic_api_key
+        chroma_host="64.176.47.89",
+        chroma_port=8000,
+        groq_api_key="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",#換成自己的groq_api_key
+        groq_model_name="llama3-8b-8192",
+        ollama_model=llm_model,
+        ollama_base_url=ollama_api_url # 設定自建的LLM服務位置
+    )
+
+    # 選擇要使用的 LLM 模型（True 使用 PrimeHub Ollama 模型，False 使用 Groq 模型）
+    pipeline.set_llm(use_primehub=True)
+
+    response = pipeline.query(prompt)
+    return response
+
+
 if prompt := st.chat_input():
     print(f"model = ${llm_model}")
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
     print(st.session_state.messages)
-    response = llm.invoke(prompt)
+    response = run_rag_process(prompt)
     #response = llm.invoke(st.session_state.messages)
     #msg = response.choices[0].message.content
-    msg = response
+    msg = response["result"]
     st.session_state.messages.append({"role": "assistant", "content": msg})
     st.chat_message("assistant").write(msg)
 

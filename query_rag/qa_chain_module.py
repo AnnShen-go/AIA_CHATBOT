@@ -95,27 +95,3 @@ Helpful Answer:"""
     def query(self, question: str):
         # 使用 qa_chain 查询
         return self.qa_chain({"query": question})
-
-
-# qa_chain_module.py 使用示例（外部調用時）
-from qa_chain_module import QARetrievalPipeline
-
-# 初始化流水線，傳入必要的参数
-pipeline = QARetrievalPipeline(
-    collection_name="xt131028_v1",
-    nomic_api_key="nk-BCjzlgQXfYdZNA6kUZ-6Jeq1NIG2JhlQJaTe9BedpDc", #換成自己的nomic_api_key
-    chroma_host="64.176.47.89",
-    chroma_port=8000,
-    groq_api_key="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",#換成自己的groq_api_key
-    groq_model_name="llama3-8b-8192",
-    ollama_model="llama3",
-    ollama_base_url="http://8cf8-140-109-17-45.ngrok-free.app" # 設定自建的LLM服務位置
-)
-
-# 選擇要使用的 LLM 模型（True 使用 PrimeHub Ollama 模型，False 使用 Groq 模型）
-pipeline.set_llm(use_primehub=True)
-
-# 提供前端query至pipeline.query
-question = "摘要技術領袖全域班的課程內容"
-response = pipeline.query(question)
-print(response)

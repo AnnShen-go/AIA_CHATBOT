@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Linus\OneDrive\文件\python\AIA_CHATBOT\aia_chatbot
+set VIRTUAL_ENV=C:\llm\aia_chatbot_app\AIA_CHATBOT\aia_chatbot
 
 if not defined PROMPT set PROMPT=$P$G
 
