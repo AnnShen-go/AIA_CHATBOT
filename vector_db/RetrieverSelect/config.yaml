@@ -1,0 +1,30 @@
+vectorstore:
+  host: "64.176.47.89"
+  port: 8000
+  chroma_client_auth_provider: "basic"
+  chroma_client_auth_credentials: "admin:admin"
+
+docstore:
+  # 文件儲存相關配置
+  doc_path: "./docstore"  # 儲存文件的本地相對路徑
+
+  # 數據庫Collection名稱配置，每個Collection對應一個 SQLite 本地數據庫文件
+  #  t5 : AIA官網143個簡章html文件，Naive版本，不推薦使用
+  simple_html_nomic_embed_text_v1_f16_t5: "chroma_t5.sqlite3"
+  # t6: AIA官網143個簡章html文件 + 47個QA集，Naive版本，不推薦使用
+  simple_html_nomic_embed_text_v1_f16_t6_with_qa: "chroma_t6_with_qa.sqlite3"
+  # t8: 5個word簡章html文件 + 47個QA集，nomic_embed_text_v1_f16模型，對中文支持度差，不推薦使用
+  simple_html_nomic_embed_text_v1_f16_t8_aia_with_qa: "chroma_t8_aia_with_qa.sqlite3"
+  # t13: 18個word簡章html文件 + 47個QA集，Stella_Base_zh_v3_1792d模型，中文模型，推薦使用
+  simple_html_Stella_Base_zh_v3_1792d_t13_aia_with_qa: "chroma_t13_aia_with_qa.sqlite3"
+
+embedding_model:
+  # 配置用於各種文字嵌入的模型
+  simple_html_nomic_embed_text_v1_f16_t5: "nomic-ai/nomic-embed-text-v1"
+  simple_html_nomic_embed_text_v1_f16_t6_with_qa: "nomic-ai/nomic-embed-text-v1"
+  simple_html_nomic_embed_text_v1_f16_t8_aia_with_qa: "nomic-ai/nomic-embed-text-v1"
+  simple_html_Stella_Base_zh_v3_1792d_t13_aia_with_qa: "infgrad/stella-base-zh-v3-1792d"
+
+topK:
+  # 配置返回結果的數量
+  k: 5
