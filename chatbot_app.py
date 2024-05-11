@@ -21,7 +21,7 @@ if "messages" not in st.session_state:
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
-llm = Ollama(model="llama3", base_url="http://3ece-140-109-17-42.ngrok-free.app")
+llm = Ollama(model="llama3", base_url="http://llm.michibakery.com")
 
 if prompt := st.chat_input():
     
