@@ -114,7 +114,7 @@ class RetrieverSelect():
         """
 
         # read config
-        with open('../../AppData/Roaming/JetBrains/PyCharmCE2024.1/light-edit/config.json', 'r') as f:
+        with open('config.json', 'r') as f:
             config = json.load(f)
 
         # Define Chromadb Client

@@ -6,7 +6,7 @@
         "chroma_client_auth_credentials": "admin:admin"
     },
     "docstore": {
-        "doc_path": "",
+        "doc_path": "./docstore",
         "simple_html_nomic_embed_text_v1_f16_t5": "chroma_t5.sqlite3",
         "simple_html_nomic_embed_text_v1_f16_t6_with_qa": "chroma_t6_with_qa.sqlite3",
         "simple_html_nomic_embed_text_v1_f16_t8_aia_with_qa": "chroma_t8_aia_with_qa.sqlite3",
