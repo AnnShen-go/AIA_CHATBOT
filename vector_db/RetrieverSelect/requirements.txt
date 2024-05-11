@@ -1,0 +1,6 @@
+chromadb==0.4.24
+langchain==0.1.20
+langchain_community==0.0.38
+langchain_core==0.1.52
+PyPika==0.48.9
+sentence_transformers==2.7.0
