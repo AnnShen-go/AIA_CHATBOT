@@ -1,0 +1,11 @@
+主題課程,內容大綱,實作課程
+開學介紹,課程暨環境介紹人工智慧概論,
+機率與統計,機率與統計基本概念缺失值處理、資料轉換、重抽法則探索式資料分析,
+Python,Python 程式設計Python 資料處理與分析Python 資料視覺化,Python 快速上手Python 資料處理、分析與視覺化
+機器學習,線性迴歸羅吉斯迴歸與 KNN 支持向量機 決策樹系列 非監督式學習 實務重點,機器學習實作 與 Kaggle 實戰
+深度學習,深度學習理論基礎神經網路調校深度學習常見問題,深度學習實作 與 Kaggle 實戰
+卷積神經網路與電腦視覺,電腦視覺基礎卷積神經網路概念經典模型介紹物件偵測 圖像分割 遷移式學習,卷積神經網路實作 與 Kaggle 實戰期中考
+循環神經網路,RNNLSTM 與 GRUSeq2seq ModelAttention Mechanism,循環神經網路實作
+生成對抗網路,Vanilla GAN Conditional GANUnsupervised Conditional GAN,生成對抗網路實作
+自然語言處理,字義表示詞向量與詞嵌入注意力機制複習TransformerBERT與其他模型,自然語言處理實作生成式AI理論與實務
+學員專題實作,專題提案與審核專題實作成果發表,
