@@ -5,6 +5,7 @@ import chromadb
 from chromadb.config import Settings
 from os import path
 import json
+import yaml
 import sqlite3
 from typing import Tuple, Iterator
 from typing import Sequence, Optional
@@ -114,8 +115,8 @@ class RetrieverSelect():
         """
 
         # read config
-        with open('config.json', 'r') as f:
-            config = json.load(f)
+        with open('config.yaml', 'r', encoding='utf-8') as file:
+            config = yaml.safe_load(file)
 
         # Define Chromadb Client
         httpClient = chromadb.HttpClient(
