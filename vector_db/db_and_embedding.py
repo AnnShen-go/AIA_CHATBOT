@@ -36,6 +36,7 @@ class CollectionSelector:
         'xt131028':'nomic-embed-text-v1.5',
         'simple_html_nomic_embed_text_v1_f16_t5':'nomic-embed-text-v1.5',
         'simple_html_Stella_Base_zh_v3_1792d_t13_aia_with_qa':'infgrad/stella-base-zh-v3-1792d',
+        'xt131028_v1.2':'infgrad/stella-base-zh-v3-1792d',
     }
     # 顯示列表
     def show_collection_list(self):
@@ -50,6 +51,8 @@ class CollectionSelector:
                 return NomicEmbeddings(model=self.collections_info[collection_name])
             case "xt131028_v1":
                 return NomicEmbeddings(model=self.collections_info[collection_name])
+            case "xt131028_v1.2":
+                return Stella_Base_zh_v3_1792d(model=self.collections_info[collection_name])
             case "xt131028":
                 return NomicEmbeddings(model=self.collections_info[collection_name])
             case "simple_html_nomic_embed_text_v1_f16_t5":
