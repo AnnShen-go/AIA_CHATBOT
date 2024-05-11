@@ -1,0 +1,10 @@
+週別,課程主題,內容大綱
+第一週,大型語言模型 (LLM) 初探,了解 LLM 的基本概念、原理、發展和應用學習 LLM 的使用時機和方法掌握 LLM 的訓練條件和流程認識 LLM 的利弊和未來趨勢ChatGPT、Bing、Claude等 LLM 的功能統整
+ChatGPT 高效問答術 (Prompt engineering),讓 ChatGPT 角色扮演，得到更高品質的回應Role based prompt用模板和例子指導 ChatGPT，讓它執行你的任務Custom Instructions Framework 用多個提示讓 ChatGPT 做更深的推理Few shot promptingChain of Thought prompt(思維鏈推理)Chaining Prompts(多個提示鏈)Tree-of Thought實用瀏覽器擴充套件 (Browser Extensions)
+ChatGPT 流程自動化,自動化工作流程概念介紹自動化工具平台介紹(專案1) 辦公室流程自動化實作-1
+ChatGPT 應用程式介面,(專案2) 辦公室流程自動化實作-2(專案3) 建立自己的 AI 知識助理
+分組專題實作討論,專題輔助工具建置網站
+第二週,探索 LLM 的運作原理,"相關深度學習技術簡介相關模型架構簡介(Transformer,BERT,GPT)常用文本處理技術簡介(Tokenization、Word Embedding) 文本相似度計算與應用 向量資料庫功能簡介 遷移學習概念介紹LLM 的微調時機、三種微調方式簡介"
+開源 LLM 模型介紹 & 雲端聊天機器人體驗,"各式開源 LLM 模型特點介紹模型託管平台 Hugging Face介紹雲端聊天機器人體驗(Taiwan LLM ChatUI + LLM Stack)開源 LLM 模型選取與下載檢索增強生成原理簡介(Retrieval-Augmented Generation, RAG)"
+運用 LLM 互動式介面工具,雲端使用 LLM 模型開發客服機器人並實作 RAG (Chatbase、Openchat)在本機端使用 LM Studio 與 LLM 模型對話在本機端安裝 LLM Stack 並實作 RAG將特定情境下的聊天機器人發佈為網頁 APP
+分組專實作討論與成果發表,客服機器人嵌入個人網站小組實作成果分享

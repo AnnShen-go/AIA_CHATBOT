@@ -1,0 +1,9 @@
+週別,課程主題,內容大綱
+第一週,人工智慧到大型語言模型概論,人工智慧與LLM 概論LLM 的道德議題、限制與風險相關實例分享
+LangChain 概述,LangChain 介紹及應用基本 LangChain 套件使用
+資料處理及連接,Data Connection
+企業案例應用,LangChain 實例解析使用 LangChain 實作相關企業案例
+第三週,LLM 開源模型的微調方式,介紹開源 LLM 模型微調開源 LLM 模型
+提升大型語言模型性能的框架,"檢索增強 (Retrieval Augmented Generation, RAG) 介紹實作檢索增強"
+第四週,LLM 建立及部署方法,LLM pipeline建立及部署聊天機器人相關實例分享
+成果發表,
