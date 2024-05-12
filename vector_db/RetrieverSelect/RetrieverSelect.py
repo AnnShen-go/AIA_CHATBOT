@@ -119,11 +119,27 @@ class RetrieverSelect():
             config = yaml.safe_load(file)
 
         # Define Chromadb Client
-        httpClient = chromadb.HttpClient(
-            host=config['vectorstore']['host'], port=config['vectorstore']['port'],
-            settings=Settings(chroma_client_auth_provider=config['vectorstore']['chroma_client_auth_provider'],
-                              chroma_client_auth_credentials=config['vectorstore']['chroma_client_auth_credentials'])
-        )
+        try:
+            httpClient = chromadb.HttpClient(
+                host=config['vectorstore']['host'], port=config['vectorstore']['port'],
+                settings=Settings(chroma_client_auth_provider=config['vectorstore']['chroma_client_auth_provider_auth'],
+                                  chroma_client_auth_credentials=config['vectorstore']['chroma_client_auth_credentials'])
+            )
+        except ModuleNotFoundError:
+            try:
+                httpClient = chromadb.HttpClient(
+                    host=config['vectorstore']['host'], port=config['vectorstore']['port'],
+                    settings=Settings(
+                        chroma_client_auth_provider=config['vectorstore']['chroma_client_auth_provider_authn'],
+                        chroma_client_auth_credentials=config['vectorstore']['chroma_client_auth_credentials'])
+                )
+            except ModuleNotFoundError:
+                httpClient = chromadb.HttpClient(
+                    host=config['vectorstore']['host'], port=config['vectorstore']['port'],
+                    settings=Settings(
+                        chroma_client_auth_provider=config['vectorstore']['chroma_client_auth_provider'],
+                        chroma_client_auth_credentials=config['vectorstore']['chroma_client_auth_credentials'])
+                )
 
         # Select embedding model from config
         embedding_model_name = config['embedding_model'][collection_name]

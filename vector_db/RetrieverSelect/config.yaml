@@ -1,7 +1,9 @@
 vectorstore:
   host: "64.176.47.89"
   port: 8000
-  chroma_client_auth_provider: "basic"
+  chroma_client_auth_provider: "basic"  # 三種模組名稱，處理套件兼容性
+  chroma_client_auth_provider_auth: "chromadb.auth.basic_auth.BasicAuthClientProvider"
+  chroma_client_auth_provider_authn: "chromadb.auth.basic_authn.BasicAuthClientProvider"
   chroma_client_auth_credentials: "admin:admin"
 
 docstore:
