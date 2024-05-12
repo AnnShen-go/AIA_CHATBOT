@@ -130,29 +130,39 @@ chunk大小:250, chunk_overlap=50
 ```python
 from vector_db import db_and_embedding
 
-query = "技術領袖培訓全域班"
-aia_collection = db_and_embedding.CollectionSelector()
-db = aia_collection.db #預設是XT131028_v1
+# 使用預設的 db
+aia_collection = db_and_embedding.CollectionSelector("xt131028_v1")
 
-# 測試
+# 明確指定 db 詳細參數的寫法:
+aia_collection = db_and_embedding.CollectionSelector(collection_name="xt131028_v1", host="64.176.47.89", port=8000,chroma_client_auth_credentials="admin:admin")
+
+# 使用db
+db = aia_collection.db
+
+query = "技術領袖培訓全域班"
 documents = db.similarity_search(query)
-for i in documents:
-    print(i,"\n\n")
+print(documents)
 
 # 切換 DB
-db = aia_collection.switch_collection("xt131028_v1.1")# 填入collection的名稱
+db = aia_collection.switch_collection("xt131028_v1.2")
 
 # 顯示可以用的 collections
 aia_collection.show_collection_list()
 
-# 使用目前collection所用的 embedding
+# 使用 embedding model
 embedding = aia_collection.embedding
+
+print(aia_collection.host) # 顯示伺服器 ip
+print(aia_collection.port) # 顯示伺服器 port
+print(aia_collection.chroma_client_auth_credentials) # 顯示伺服器 auth帳密
+print(aia_collection.collections_info) # 顯示 collection 跟 embedding name 的對照表
+print(aia_collection.embedding_model_mapping) # 顯示 embbeding name 跟 embedding model 的對照表
 ```
 
 
 ## 引入 qa_chain_module，使用示例如下：
 
-```
+```python
 # 調用QARetrievalPipeline
 from qa_chain_module import QARetrievalPipeline
 
