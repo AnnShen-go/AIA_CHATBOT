@@ -184,7 +184,62 @@ pipeline.set_llm(use_primehub=True)
 
 # 提供前端query至pipeline.query
 question = "摘要技術領袖全域班的課程內容"
+
+
 response = pipeline.query(question)
 print(response)
 ```
+# MultiVectorRetriever 调用示例
 
+以下是如何在 Python 项目中调用 `MultiVectorRetriever` 的示例：
+
+```python
+# 导入 CustomMultiVectorRetriever 类
+from path.to.RetrieverSelect import CustomMultiVectorRetriever
+
+# 初始化 retriever 并指定集合名称
+retriever = CustomMultiVectorRetriever().get_retriever(collection_name="simple_html_Stella_Base_zh_v3_1792d_t13_aia_with_qa")
+```
+# MultiVectorRetrieve 数据库 Collection
+
+以下是 MultiVectorRetrieve 可用的 Collection 列表以及它们的描述：
+
+- **t5:** 
+  - **描述:** AIA官網143个简章html文件，Naive版本，不推荐使用
+  - **Collection 名称:** `simple_html_nomic_embed_text_v1_f16_t5`
+
+- **t6:** 
+  - **描述:** AIA官網143个简章html文件 + 47个QA集，Naive版本，不推荐使用
+  - **Collection 名称:** `simple_html_nomic_embed_text_v1_f16_t6_with_qa`
+
+- **t8:** 
+  - **描述:** 5个word简章html文件 + 47个QA集，nomic_embed_text_v1_f16模型，对中文支持度差，不推荐使用
+  - **Collection 名称:** `simple_html_nomic_embed_text_v1_f16_t8_aia_with_qa`
+
+- **t13:** 
+  - **描述:** 18个word简章html文件 + 47个QA集，Stella_Base_zh_v3_1792d模型，中文模型，推荐使用
+  - **Collection 名称:** `simple_html_Stella_Base_zh_v3_1792d_t13_aia_with_qa`
+
+<details>
+<summary>簡章資料集</summary>
+
+1. 全域技術班第五期-招生簡章_順延一週更新版_
+2. LLM進階班│第四期-招生簡章退費辦法更新版0427
+3. 台北總校經理人研修班│第十九期
+4. 全域技術班│第四期
+5. 台北總校經理人研修班│第二十期
+6. 中部智慧醫療專班│第六期
+7. LLM進階班│第三期
+8. LLM初階班│第四期
+9. 2024-LLM課程設計(做AI_四天)  地點更新版
+10. 2024-LLM課程設計-素養課程(用AI_兩天).docx(地點更新版)
+11. 【簡章】AIGC 實戰冬令營：高中生的第一個生成式 AI 營隊#2024
+12. 2024-LLM課程設計(做AI_四天) 
+13. LLM課程設計-素養課程(用AI_兩天)
+14. 【簡章】AIGC 實戰夏令營：高中生的第一個生成式 AI 營隊
+15. 台中第十二期產業AI專班(智慧製造)-招生簡章 
+16. 台北總校第十八期經理人研修班招生簡章
+17. 台北總校第十七期產業 AI 專班(智慧製造)招生簡章
+18. 台北總校第十六期經理人研修班招生簡章
+
+</details>
