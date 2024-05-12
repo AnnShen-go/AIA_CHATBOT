@@ -65,7 +65,6 @@ class CollectionSelector:
     def build_embedding_model(self,collection_name):
         embeddinng_name = self.collections_info[collection_name]
         embedding_model = self.embedding_model_mapping[embeddinng_name]
-        print(embedding_model)
         return embedding_model(model=embeddinng_name)
 
     # 建立 db 連線
