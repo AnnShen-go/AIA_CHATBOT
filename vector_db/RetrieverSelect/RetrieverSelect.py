@@ -101,7 +101,7 @@ class _SentenceTransformerModel:
         return self.model.encode([query]).tolist()[0]
 
 
-class RetrieverSelect():
+class CustomMultiVectorRetriever():
 
     def get_retriever(self, collection_name: str) -> RunnableParallel:
         """
@@ -171,8 +171,9 @@ class RetrieverSelect():
         )
 
         # wrap to langchain runnable
-        retriever = RunnableParallel(
-            {"context": mvr_retriever, "question": RunnablePassthrough()}
-        )
+        # retriever = RunnableParallel(
+        #     {"context": mvr_retriever, "question": RunnablePassthrough()}
+        # )
+        retriever = mvr_retriever
 
         return retriever

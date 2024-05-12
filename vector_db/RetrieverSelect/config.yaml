@@ -29,4 +29,4 @@ embedding_model:
 
 topK:
   # 配置返回結果的數量
-  k: 5
+  k: 4
