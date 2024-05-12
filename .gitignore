@@ -2,3 +2,4 @@
 query_rag/__pycache__/__init__.cpython-312.pyc
 query_rag/__pycache__/qa_chain_module.cpython-311.pyc
 query_rag/__pycache__/qa_chain_module.cpython-312.pyc
+.DS_Store
