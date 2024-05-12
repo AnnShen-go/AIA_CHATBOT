@@ -30,6 +30,16 @@ if not os.environ.get("NOMIC_API_KEY"):
 
 
 class CollectionSelector:
+    """
+    host str db位置
+    port int 連線port號
+    collection_name: 目前所選 collection 名稱
+    embeddinng: 正在使用的embedding model
+    collections_info: dict 紀錄所有 collection 所用的embedding model 名稱
+    embedding_model_mapping: dict 紀錄所有 embeddinng model 名稱所對應的 embedding model 模型
+
+    """
+
     # 各個 collection 所用 embedding 對應表
     collections_info={
         'xt131028_v1.1':'nomic-embed-text-v1.5',
@@ -39,27 +49,24 @@ class CollectionSelector:
         'simple_html_Stella_Base_zh_v3_1792d_t13_aia_with_qa':'infgrad/stella-base-zh-v3-1792d',
         'xt131028_v1.2':'infgrad/stella-base-zh-v3-1792d',
     }
+
+    embedding_model_mapping={
+        'nomic-embed-text-v1.5':NomicEmbeddings,
+        'infgrad/stella-base-zh-v3-1792d':Stella_Base_zh_v3_1792d
+    }
+
     # 顯示列表
     def show_collection_list(self):
         print("collection列表:")
         for k,i in self.collections_info.items():
             print(f"{k}: {i}")
 
-    # 建立 embedding_model
+    # 建立 embedding_model #依據 collections_info 跟 embedding_model_mapping 建立 embedding model
     def build_embedding_model(self,collection_name):
-        match collection_name:
-            case "xt131028_v1.1":
-                return NomicEmbeddings(model=self.collections_info[collection_name])
-            case "xt131028_v1":
-                return NomicEmbeddings(model=self.collections_info[collection_name])
-            case "xt131028_v1.2":
-                return Stella_Base_zh_v3_1792d(model=self.collections_info[collection_name])
-            case "xt131028":
-                return NomicEmbeddings(model=self.collections_info[collection_name])
-            case "simple_html_nomic_embed_text_v1_f16_t5":
-                return NomicEmbeddings(model=self.collections_info[collection_name])#"infgrad/stella-base-zh-v3-1792d"
-            case "simple_html_Stella_Base_zh_v3_1792d_t13_aia_with_qa":
-                return Stella_Base_zh_v3_1792d(self.collections_info[collection_name])#"infgrad/stella-base-zh-v3-1792d"
+        embeddinng_name = self.collections_info[collection_name]
+        embedding_model = self.embedding_model_mapping[embeddinng_name]
+        return embedding_model(model=embeddinng_name)
+
     # 建立 db 連線
     def db_connection(self,httpClient,collection_name,embedding_function):
         return Chroma(
@@ -69,22 +76,23 @@ class CollectionSelector:
         )
     
     # 初始化
-    def __init__(self):
+    def __init__(self,collection_name="xt131028_v1", host="64.176.47.89", port=8000,chroma_client_auth_credentials="admin:admin"):
 
         # 連線設定
-        self.collection_name = "xt131028_v1"
+        self.collection_name = collection_name
+        self.host = host
+        self.port = port
+        self.chroma_client_auth_credentials = chroma_client_auth_credentials
 
         self.httpClient = chromadb.HttpClient(
-            host='64.176.47.89', port=8000,
-            settings=chromadb.config.Settings(chroma_client_auth_provider="chromadb.auth.basic_authn.BasicAuthClientProvider",chroma_client_auth_credentials="admin:admin")
+            host = self.host ,
+            port = self.port,
+            settings=chromadb.config.Settings(chroma_client_auth_provider="chromadb.auth.basic_authn.BasicAuthClientProvider",chroma_client_auth_credentials=self.chroma_client_auth_credentials)
         )
+        # 選取 collection
+        self.switch_collection(self.collection_name)
 
-        # build embedding model
-        self.embedding = self.build_embedding_model(self.collection_name)
-        
-        # db connection
-        self.db = self.db_connection(self.httpClient, self.collection_name, self.embedding)
-
+        # 顯示 collection 列表
         self.show_collection_list()
 
     # 切換 database
@@ -109,14 +117,15 @@ class CollectionSelector:
 if __name__ == '__main__':
 
     query = "技術領袖培訓全域班"
-    aia_collection = CollectionSelector()
+    aia_collection = CollectionSelector("xt131028_v1.2") # 指定db請改寫 CollectionSelector(collection_name="xt131028_v1", host="64.176.47.89", port=8000,chroma_client_auth_credentials="admin:admin")
     db = aia_collection.db
     documents = db.similarity_search(query)
     for i in documents:
         print(i,"\n\n")
     
     print("\n\n----------------\n\n")
-
+    import sys
+    sys.exit
     # 切換 DB
     db = aia_collection.switch_collection("simple_html_Stella_Base_zh_v3_1792d_t13_aia_with_qa")
     documents = db.similarity_search(query)
