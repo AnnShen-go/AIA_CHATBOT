@@ -48,6 +48,10 @@ class CollectionSelector:
         'simple_html_nomic_embed_text_v1_f16_t5':'nomic-embed-text-v1.5',
         'simple_html_Stella_Base_zh_v3_1792d_t13_aia_with_qa':'infgrad/stella-base-zh-v3-1792d',
         'xt131028_v1.2':'infgrad/stella-base-zh-v3-1792d',
+        'nomic_250_18admission_and_qa':'nomic-embed-text-v1.5',
+        'nomic_400_18admission_and_qa':'nomic-embed-text-v1.5',
+        'stella_250_18admission_and_qa':'infgrad/stella-base-zh-v3-1792d',
+        'stella_400_18admission_and_qa':'infgrad/stella-base-zh-v3-1792d',
     }
 
     embedding_model_mapping={
@@ -117,7 +121,7 @@ class CollectionSelector:
 if __name__ == '__main__':
 
     query = "技術領袖培訓全域班"
-    aia_collection = CollectionSelector("xt131028_v1.2") # 指定db請改寫 CollectionSelector(collection_name="xt131028_v1", host="64.176.47.89", port=8000,chroma_client_auth_credentials="admin:admin")
+    aia_collection = CollectionSelector("stella_400_18admission_and_qa") # 指定db請改寫 CollectionSelector(collection_name="xt131028_v1", host="64.176.47.89", port=8000,chroma_client_auth_credentials="admin:admin")
     db = aia_collection.db
     documents = db.similarity_search(query)
     for i in documents:
@@ -127,7 +131,7 @@ if __name__ == '__main__':
     import sys
     sys.exit
     # 切換 DB
-    db = aia_collection.switch_collection("simple_html_Stella_Base_zh_v3_1792d_t13_aia_with_qa")
+    db = aia_collection.switch_collection("nomic_250_18admission_and_qa")
     documents = db.similarity_search(query)
     for i in documents:
         print(i,"\n\n")
@@ -139,4 +143,4 @@ if __name__ == '__main__':
     embedding = aia_collection.embedding
 
     #print(aia_collection.httpClient.list_collections())
-    print(db.get())
+    # print(db.get())
