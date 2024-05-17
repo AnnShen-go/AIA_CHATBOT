@@ -52,7 +52,8 @@ class QARetrievalPipeline:
         os.environ['OPENAI_API_KEY'] = openai_api_key
         self.embedding = NomicEmbeddings(model="nomic-embed-text-v1.5")
         self.StellaEmbeddings = Stella_Base_zh_v3_1792d('infgrad/stella-base-zh-v3-1792d')
-        self.Ada002Embedding = OpenAIEmbeddings()
+        if openai_api_key and openai_api_key != "":
+            self.Ada002Embedding = OpenAIEmbeddings()
 
         # 初始化 Chroma 数据库连接
         http_client = chromadb.HttpClient(
