@@ -62,9 +62,9 @@ def run_rag_process(prompt):
         if llm_model == "" or ollama_api_url == "":
             st.warning('請輸入 LLM 模型名稱及 Ollama API URL', icon="⚠️")
             return
-        elif openai_api_key == None:
-            st.warning('請輸入 OpenAI API Key', icon="⚠️")
-            return
+    elif openai_api_key == "":
+        st.warning('請輸入 OpenAI API Key', icon="⚠️")
+        return
 
     from query_rag.qa_chain_module import QARetrievalPipeline
 
