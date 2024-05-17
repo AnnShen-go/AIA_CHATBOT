@@ -6,6 +6,7 @@ query_rag/__pycache__/qa_chain_module.cpython-312.pyc
 .gitignore
 .env
 test.py
+test.ipynb
 vector_db/__pycache__/__init__.cpython-312.pyc
 vector_db/__pycache__/db_and_embedding.cpython-312.pyc
 **/__pycache__

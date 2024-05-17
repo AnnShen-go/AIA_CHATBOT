@@ -12,6 +12,8 @@ import chromadb
 import os
 from typing import List
 from sentence_transformers import SentenceTransformer
+# from langchain.chat_models import ChatOpenAI
+from langchain.embeddings.openai import OpenAIEmbeddings
 
 class Stella_Base_zh_v3_1792d:
     def __init__(self, model):
@@ -25,7 +27,10 @@ class Stella_Base_zh_v3_1792d:
 
 # 各項 API KEY
 if not os.environ.get("NOMIC_API_KEY"):
-    os.environ['NOMIC_API_KEY'] = 'nk-MT_fzB1g18s_js7cf54ecyAeN4eLvd1S4pa8FFwaJqI'
+    os.environ['NOMIC_API_KEY'] = 'nk--yZaRNVFkSDPNPz66to12N8NJ2scOSO-wZFZh1qN31k'
+
+if not os.environ.get("OPENAI_API_KEY"):
+    os.environ['OPENAI_API_KEY']="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"
 
 
 
@@ -52,11 +57,13 @@ class CollectionSelector:
         'nomic_400_18admission_and_qa':'nomic-embed-text-v1.5',
         'stella_250_18admission_and_qa':'infgrad/stella-base-zh-v3-1792d',
         'stella_400_18admission_and_qa':'infgrad/stella-base-zh-v3-1792d',
+        'gptada002_400_18admission_and_qa':'text-embedding-ada-002',
     }
 
     embedding_model_mapping={
         'nomic-embed-text-v1.5':NomicEmbeddings,
-        'infgrad/stella-base-zh-v3-1792d':Stella_Base_zh_v3_1792d
+        'infgrad/stella-base-zh-v3-1792d':Stella_Base_zh_v3_1792d,
+        'text-embedding-ada-002':OpenAIEmbeddings
     }
 
     # 顯示列表
@@ -121,7 +128,7 @@ class CollectionSelector:
 if __name__ == '__main__':
 
     query = "技術領袖培訓全域班"
-    aia_collection = CollectionSelector("stella_400_18admission_and_qa") # 指定db請改寫 CollectionSelector(collection_name="xt131028_v1", host="64.176.47.89", port=8000,chroma_client_auth_credentials="admin:admin")
+    aia_collection = CollectionSelector("gptada002_400_18admission_and_qa") # 指定db請改寫 CollectionSelector(collection_name="xt131028_v1", host="64.176.47.89", port=8000,chroma_client_auth_credentials="admin:admin")
     db = aia_collection.db
     documents = db.similarity_search(query)
     for i in documents:
