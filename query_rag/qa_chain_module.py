@@ -98,10 +98,11 @@ class QARetrievalPipeline:
         )
 
         #初始化 OpenAI LLM 服务
-        self.llm_OpenAI = ChatOpenAI(
-            model_name=openai_model_name,
-            temperature=0
-        )
+        if openai_api_key and openai_api_key != "":
+            self.llm_OpenAI = ChatOpenAI(
+                model_name=openai_model_name,
+                temperature=0
+            )
 
 
         # 初始化基本 Retriever
