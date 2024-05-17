@@ -42,10 +42,10 @@ with st.sidebar:
     openai_api_key = ""
     llm_model = ""
     ollama_api_url = ""
-    
+
     if model_platform_type == "ollama":
-        llm_model = st.text_input("LLM 模型", key="llm_model")
-        ollama_api_url = st.text_input("Ollama API URL", key="ollama_api_url")
+        llm_model = st.text_input("LLM 模型", key="llm_model", value="ycchen/breeze-7b-instruct-v1_0")
+        ollama_api_url = st.text_input("Ollama API URL", key="ollama_api_url", value="http://8cf8-140-109-17-45.ngrok-free.app")
     else:   
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     #    "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
