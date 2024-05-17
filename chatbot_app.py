@@ -56,8 +56,6 @@ if "messages" not in st.session_state:
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
-llm = Ollama(model=llm_model, base_url=ollama_api_url)
-
 def run_rag_process(prompt):
 
     if model_platform_type == 'ollama':
