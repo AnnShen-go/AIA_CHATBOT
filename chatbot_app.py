@@ -34,8 +34,7 @@ with st.sidebar:
     llm_model = st.text_input("LLM 模型", key="llm_model")
     ollama_api_url = st.text_input("Ollama API URL", key="ollama_api_url")
     collection_version = st.text_input("Choose collection version")
-
-#    openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+    openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
 #    "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
 #    "[View the source code](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
 #    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
@@ -64,12 +63,12 @@ def run_rag_process(prompt):
         groq_model_name="llama3-8b-8192",
         ollama_model=llm_model,
         ollama_base_url=ollama_api_url, # 設定自建的LLM服務位置
-        openai_api_key="",
+        openai_api_key=openai_api_key,
         openai_model_name="gpt-4o"
     )
 
     # 選擇要使用的 LLM 模型（True 使用 PrimeHub Ollama 模型，False 使用 Groq 模型）
-    pipeline.set_llm(use_openai==True)
+    pipeline.set_llm(use_openai=True)
 
     response = pipeline.query(prompt)
     return response
