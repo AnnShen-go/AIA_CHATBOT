@@ -39,6 +39,10 @@ with st.sidebar:
 
     st.divider()
 
+    openai_api_key = ""
+    llm_model = ""
+    ollama_api_url = ""
+    
     if model_platform_type == "ollama":
         llm_model = st.text_input("LLM 模型", key="llm_model")
         ollama_api_url = st.text_input("Ollama API URL", key="ollama_api_url")
