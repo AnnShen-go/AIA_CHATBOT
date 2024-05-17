@@ -3,25 +3,31 @@ from langchain.chains.llm import LLMChain
 from langchain.schema import Document
 from langchain_community.llms import Ollama
 
-import chromadb
-from chromadb.config import Settings
-from langchain.vectorstores import Chroma
+#import chromadb
+#from chromadb.config import Settings
+#from langchain.vectorstores import Chroma
 import streamlit as st
 
-def get_chroma_collections(server_url):
+__import__('pysqlite3')
+import sys,os
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+#def get_chroma_collections(server_url):
     # Initialize the LangChain database client
     # 連線設定
-    httpClient = chromadb.HttpClient(
-        host=server_url, port=8000,
-        settings=Settings(chroma_client_auth_provider="chromadb.auth.basic_authn.BasicAuthClientProvider",chroma_client_auth_credentials="admin:admin")
-    )
+#    httpClient = chromadb.HttpClient(
+#        host=server_url, port=8000,
+#        settings=Settings(chroma_client_auth_provider="chromadb.auth.basic_authn.BasicAuthClientProvider",chroma_client_auth_credentials="admin:admin")
+#   )
     # Get all collections from the Chroma Server
-    collections = httpClient.list_collections()
+#    collections = httpClient.list_collections()
 
     #for c in collections:
     #    print(c)
 
-get_chroma_collections("64.176.47.89")
+
+
+#get_chroma_collections("64.176.47.89")
 #ngrok http 11434 --host-header="localhost:11434" --scheme http
 
 with st.sidebar:
@@ -50,7 +56,7 @@ def run_rag_process(prompt):
 
     # 初始化流水線，傳入必要的参数
     pipeline = QARetrievalPipeline(
-        collection_name="xt131028_v1",
+        collection_name="stella_400_18admission_and_qa",
         nomic_api_key="nk-BCjzlgQXfYdZNA6kUZ-6Jeq1NIG2JhlQJaTe9BedpDc", #換成自己的nomic_api_key
         chroma_host="64.176.47.89",
         chroma_port=8000,
