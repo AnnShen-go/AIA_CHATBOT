@@ -68,7 +68,7 @@ example_prompts = [
     "AIA 有什麼課程?",
     "請介紹經理人專班",
     "有 LLM 相關的課程嗎?",
-    "請給我技術領袖班的課程簡章"
+    "請給我第四期技術領袖班的課程簡章"
 ]
 
 def run_rag_process(prompt):
