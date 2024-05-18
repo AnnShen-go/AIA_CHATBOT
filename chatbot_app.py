@@ -55,7 +55,7 @@ with st.sidebar:
 st.title("💬 AIA 課程小幫手")
 st.caption("🚀 AIA Course Assistant")
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": ""嗨！我是 AIA 台灣人工智慧學校的虛擬助理，隨時準備回答您的課程問題。"}]
+    st.session_state["messages"] = [{"role": "assistant", "content": "嗨! 我是 AIA 台灣人工智慧學校的虛擬助理，隨時準備回答您的課程問題"}]
 
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
