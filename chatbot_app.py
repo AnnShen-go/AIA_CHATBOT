@@ -52,10 +52,10 @@ with st.sidebar:
     #    "[View the source code](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
     #    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
     #collection_version = st.text_input("Choose collection version")
-st.title("💬 AIA Chatbot")
-st.caption("🚀 AIA 課程查詢機器人")
+st.title("💬 AIA 課程小幫手")
+st.caption("🚀 AIA Course Assistant")
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+    st.session_state["messages"] = [{"role": "assistant", "content": ""嗨！我是 AIA 台灣人工智慧學校的虛擬助理，隨時準備回答您的課程問題。"}]
 
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
