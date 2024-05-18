@@ -60,6 +60,9 @@ if "messages" not in st.session_state:
 if 'button_disabled' not in st.session_state:
     st.session_state.button_disabled = False
 
+if 'clicked_button' not in st.session_state:
+    st.session_state.clicked_button = None
+
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
@@ -117,10 +120,10 @@ for i, button_text in enumerate(example_prompts):
         if st.button(button_text, disabled=st.session_state.button_disabled):
             clicked_button_text = button_text
             st.session_state.button_disabled = True
-            st.experimental_rerun()
 
 # 處理按鈕點擊事件
-if clicked_button_text:
+if st.session_state.clicked_button:
+    clicked_button_text = st.session_state.clicked_button
     st.session_state.messages.append({"role": "user", "content": clicked_button_text})
     with st.chat_message("user"):
         st.write(clicked_button_text)
@@ -132,6 +135,7 @@ if clicked_button_text:
         with st.chat_message("assistant"):
             st.write(msg)
     # 重新啟用按鈕
+    st.session_state.clicked_button = None
     st.session_state.button_disabled = False        
     st.experimental_rerun()
 
