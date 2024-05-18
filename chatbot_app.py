@@ -57,8 +57,19 @@ st.caption("🚀 AIA Course Assistant")
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "嗨! 我是 AIA 台灣人工智慧學校的虛擬助理，隨時準備回答您的課程問題"}]
 
+if 'button_disabled' not in st.session_state:
+    st.session_state.button_disabled = False
+
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
+
+# Example prompts
+example_prompts = [
+    "AIA 有什麼課程?",
+    "請介紹經理人專班",
+    "有 LLM 相關的課程嗎?",
+    "請給我技術領袖班的課程簡章"
+]
 
 def run_rag_process(prompt):
 
@@ -92,12 +103,39 @@ def run_rag_process(prompt):
     else:
         pipeline.set_llm(use_openai=True)
 
+    pipeline.set_retriever("default")
+
     response = pipeline.query(prompt)
     return response
 
+clicked_button_text = None
+
+cols = st.columns(4)
+
+for i, button_text in enumerate(example_prompts):
+    with cols[i]:
+        if st.button(button_text, disabled=st.session_state.button_disabled):
+            clicked_button_text = button_text
+            st.session_state.button_disabled = True
+
+# 處理按鈕點擊事件
+if clicked_button_text:
+    st.session_state.messages.append({"role": "user", "content": clicked_button_text})
+    with st.chat_message("user"):
+        st.write(clicked_button_text)
+    response = run_rag_process(clicked_button_text)  # 調用回應函數
+    if response:
+        print(response)
+        msg = response["result"]
+        st.session_state.messages.append({"role": "assistant", "content": msg})
+        with st.chat_message("assistant"):
+            st.write(msg)
+    # 重新啟用按鈕
+    st.session_state.button_disabled = False        
+    st.experimental_rerun()
+
 
 if prompt := st.chat_input():
-    print(f"model = ${llm_model}")
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
     print(st.session_state.messages)

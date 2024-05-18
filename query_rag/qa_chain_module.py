@@ -108,7 +108,7 @@ class QARetrievalPipeline:
         # 初始化基本 Retriever
         self.retriever = self.db.as_retriever(search_kwargs={
             "fetch_k": 10,
-            "k": 3,
+            "k": 10,
             "mmr_score_cache": True,
             "mmr_rerank_top_k": 30
         }, retriever_mode="reduce_op_recursive", search_type="mmr")
