@@ -117,6 +117,7 @@ for i, button_text in enumerate(example_prompts):
         if st.button(button_text, disabled=st.session_state.button_disabled):
             clicked_button_text = button_text
             st.session_state.button_disabled = True
+            st.experimental_rerun()
 
 # 處理按鈕點擊事件
 if clicked_button_text:
