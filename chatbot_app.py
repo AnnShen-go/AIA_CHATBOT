@@ -114,12 +114,12 @@ def run_rag_process(prompt):
 clicked_button_text = None
 
 cols = st.columns(4)
-
 for i, button_text in enumerate(example_prompts):
     with cols[i]:
         if st.button(button_text, disabled=st.session_state.button_disabled):
-            clicked_button_text = button_text
+            st.session_state.clicked_button = button_text
             st.session_state.button_disabled = True
+
 
 # 處理按鈕點擊事件
 if st.session_state.clicked_button:
