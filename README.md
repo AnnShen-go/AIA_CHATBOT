@@ -243,3 +243,16 @@ retriever = CustomMultiVectorRetriever().get_retriever(collection_name="simple_h
 18. 台北總校第十六期經理人研修班招生簡章
 
 </details>
+
+# requirments.txt 套件安裝問題
+安裝時如出現如下錯誤，請單獨執行 `pip install pysqlite3-binary` ，再次確認是否為同樣問題。
+![image](https://github.com/WangBingXun/AIA_CHATBOT/assets/168880184/ad1af720-6552-4675-80fd-fd9bedaa3da8)
+
+如果確認問題來自安裝 `pysqlite3-binary` 套件時發生的，再確認 python 版本。如果 Python 是 3.10 以上的較新版本，可以不用安裝此 package。解決方式：
+1. 刪除 requirements.txt 中的`pysqlite3-binary`
+2. 將 chatbot_app.py 中的以下代碼註解掉：
+  ```python
+  __import__('pysqlite3')
+  import sys,os
+  sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+```
